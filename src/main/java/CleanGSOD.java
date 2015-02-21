@@ -32,15 +32,15 @@ public class GSODClean extends Configured implements Tool {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         job.setMapperClass(GSODCleanMapper.class);
-        job.setReducerClass(GSODCleanReducer.class);
+        //job.setReducerClass(GSODCleanReducer.class);
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
 
-        //job.setNumReduceTasks(0);
+        job.setNumReduceTasks(0);
 
-        job.setOutputKeyClass(NullWritable.class);
-        job.setOutputValueClass(Text.class);
+        job.setMapOutputKeyClass(NullWritable.class);
+        job.setMapOutputValueClass(Text.class);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }
